@@ -21,17 +21,24 @@
 		}
 		console.log(inputs);
 		
-		var argsFn = function() {
+		var exe = function () {
 			
+		};
+		var argsFn = function() {
+			console.log("logsFn");
 			return {use: useFn};
 		}; 
-		var useFn = function() {
-			
-			return {args: argsFn};
-		}
+		var useFn = function  () {
+			console.log("useFn");
+			return exe;
+		};
+		exe.args = argsFn;
+		
 		if (inputs.length && matchType(inputs, {length: "number", push: "function", indexOf: "function", splice: "function"})){
-			
+			console.log("overload in function", exe);
+			return exe;
 		} else if (inputs.length === 0) {
+			console.log("overload as function")
 			return {args: argsFn}
 		}
 	}
