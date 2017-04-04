@@ -20,6 +20,15 @@
 						console.log(`${x} + ${y} = ${x+y}`);
 					})
 			}
+			var testfn3 = function(a,b,c){
+				overload(a,b,c)
+					.args("string", "string", "string").use(function(firstName, middleName, lastName){
+						console.log(`Hi ${firstName}, ${lastName}`)
+					})
+					.args("number", "number", "number").use(function(x, y, z){
+						console.log(`${x} + ${y} + ${z} = ${x+y+z}`);
+					})
+			}
 		</script>
 	</body>
 </html>
