@@ -20,8 +20,19 @@
 			inputs = arguments[0];
 		}
 		console.log(inputs);
-		if (matchType(inputs, [length: "number", push: "function", indexOf: "function", splice: "function"])){
+		
+		var argsFn = function() {
 			
+			return {use: useFn};
+		}; 
+		var useFn = function() {
+			
+			return {args: argsFn};
+		}
+		if (inputs.length && matchType(inputs, {length: "number", push: "function", indexOf: "function", splice: "function"})){
+			
+		} else if (inputs.length === 0) {
+			return {args: argsFn}
 		}
 	}
 	
