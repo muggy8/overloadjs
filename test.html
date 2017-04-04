@@ -6,11 +6,14 @@
 		<script>
 			var testfn = overload()
 				.args("string", "string").use(function(firstName, lastName){
-					console.log(`Hi ${firstName}, ${lastName}`)
+					console.log(`Hi ${firstName} ${lastName}`)
 				})
 				.args("number", "number").use(function(x, y){
 					console.log(`${x} + ${y} = ${x+y}`);
 				})
+			testfn(5, 9)
+			testfn("John", "Cena")
+			
 			var testfn2 = function(){
 				overload(arguments)
 					.args("string", "string").use(function(firstName, lastName){
@@ -20,6 +23,9 @@
 						console.log(`${x} + ${y} = ${x+y}`);
 					})
 			}
+			testfn2(5, 9)
+			testfn2("John", "Cena")
+			
 			var testfn3 = function(a,b,c){
 				overload(a,b,c)
 					.args("string", "string", "string").use(function(firstName, middleName, lastName){
@@ -29,10 +35,6 @@
 						console.log(`${x} + ${y} + ${z} = ${x+y+z}`);
 					})
 			}
-			testfn(5, 9)
-			testfn("John", "Cena")
-			testfn2(5, 9)
-			testfn2("John", "Cena")
 			testfn3(5, 9, 12)
 			testfn3("John", "Something", "Cena")
 		</script>
