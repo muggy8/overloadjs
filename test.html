@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<script src="overload.min.js"></script>
+		<script src="overload.js"></script>
 	</head>
 	<body>
 		<script>
@@ -11,6 +11,9 @@
 				.args("number", "number").use(function(x, y){
 					console.log(`${x} + ${y} = ${x+y}`);
 				})
+                .args().use(function(){
+                    console.log("no appropriate method signature");
+                });
 			testfn(5, 9)
 			testfn("John", "Cena")
 			testfn(5, "Cena")
@@ -24,9 +27,14 @@
 					.args("number", "number").use(function(x, y){
 						console.log(`${x} + ${y} = ${x+y}`);
 					})
+                    .args().use(function(){
+                        console.log("no appropriate method signature");
+                    });
 			}
 			testfn2(5, 9)
 			testfn2("John", "Cena")
+			testfn2(5, "Cena")
+			testfn2({firstName: "John", lastName: "Cena"}, 9001)
 
 			var testfn3 = function(a,b,c){
 				overload(a,b,c)
@@ -36,9 +44,14 @@
 					.args("number", "number", "number").use(function(x, y, z){
 						console.log(`${x} + ${y} + ${z} = ${x+y+z}`);
 					})
+                    .args().use(function(){
+                        console.log("no appropriate method signature");
+                    });
 			}
 			testfn3(5, 9, 12)
 			testfn3("John", "Something", "Cena")
+			testfn3(5, "Cena")
+			testfn3({firstName: "John", lastName: "Cena"}, 9001)
 		</script>
 	</body>
 </html>
