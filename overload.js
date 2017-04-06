@@ -15,6 +15,7 @@
 	}
 	
 	context.overload = function(){
+		var executionContext = this;
 		var inputs = arguments;
 		if (arguments.length === 1){
 			inputs = arguments[0];
@@ -36,7 +37,8 @@
 			return {use: function(callback){
 				exeArgs.push({match: useArgs, execute: callback});
 				if (inputs.length && matchType(inputs, useArgs)) {
-					return callback.apply(null, inputs);
+					callback.apply(executionContext, inputs);
+					return exe;
 				}
 				else {
 					return exe;
@@ -46,7 +48,7 @@
 		}; 
 		exe.args = argsFn;
 		
-		if (inputs.length && matchType(inputs, {length: "number", push: "function", indexOf: "function", splice: "function"})){
+		if (inputs.length){
 			console.log("overload in function");
 			return exe;
 		} else if (inputs.length === 0) {
