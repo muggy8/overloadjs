@@ -54,15 +54,36 @@
 	}
 
     context.overload.define = function (obj) {
-        if (typeof obj !== 'object') {
+        if (typeof obj === 'function') {
+            try {
+                return context.overload.define(new obj());
+            }
+            catch (err) {
+                console.log("Class definition does not have a null constructor");
+                return;
+            }
+        }
+        else if (typeof obj !== 'object') {
             return;
         }
         else {
-            var objKeys = Object.keys(obj);
             var objectDefinition = {};
+
+            var objKeys = Object.keys(obj);
             for (var i = 0; i < objKeys.length; i++) {
-                console.log(objKeys[i]);
+                var thisKey = objKeys[i];
+                objectDefinition[thisKey] = typeof obj[thisKey];
             }
+            if (obj.__proto__) {
+                var inheritedDefs = context.overload.define(obj.__proto__);
+                var inheritedKeys = Object.keys(inheritedDefs);
+                for (var i = 0; i < inheritedKeys.length; i++){
+                    var inheritedKey = inheritedKeys[i]
+                    objectDefinition[inheritedKey] = objectDefinition[inheritedKey] || inheritedDefs[inheritedKey];
+                }
+            }
+
+            return objectDefinition;
         }
     }
 
