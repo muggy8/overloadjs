@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<script src="overload.js"></script>
+		<script src="overload.min.js"></script>
 	</head>
 	<body>
 		<script>
@@ -15,7 +15,7 @@
 			testfn("John", "Cena")
 			testfn(5, "Cena")
 			testfn({firstName: "John", lastName: "Cena"}, 9001)
-			
+
 			var testfn2 = function(){
 				overload(arguments)
 					.args("string", "string").use(function(firstName, lastName){
@@ -27,7 +27,7 @@
 			}
 			testfn2(5, 9)
 			testfn2("John", "Cena")
-			
+
 			var testfn3 = function(a,b,c){
 				overload(a,b,c)
 					.args("string", "string", "string").use(function(firstName, middleName, lastName){
