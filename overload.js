@@ -1,6 +1,6 @@
 "use strict";
 (function(context){
-	
+
 	var matchType = function (inputArray, matchArray){
 		var runningMatch = true;
 		for (var key in matchArray) {
@@ -13,49 +13,45 @@
 		}
 		return runningMatch;
 	}
-	
+
 	context.overload = function(){
 		var executionContext = this;
 		var inputs = arguments;
 		if (arguments.length === 1){
 			inputs = arguments[0];
 		}
-		
+        //inputs = Array.prototype.slice.call(inputs, 0);
+
 		var exeArgs = [];
-		
+        var exefake = function (){};
+        exefake.use = exefake.args = function(){return exefake;};
+
 		var exe = function () {
 			for (var key in exeArgs ) {
 				var matchAndRun = exeArgs[key]
 				if (matchType(arguments, matchAndRun.match)){
-					return matchAndRun.execute.apply(null, arguments);
+					return matchAndRun.execute.apply(this, arguments);
 				}
 			}
 		};
 		var argsFn = function() {
 			var useArgs = arguments;
-			
+
 			return {use: function(callback){
 				exeArgs.push({match: useArgs, execute: callback});
 				if (inputs.length && matchType(inputs, useArgs)) {
 					callback.apply(executionContext, inputs);
-					return exe;
+					return exefake;
 				}
 				else {
 					return exe;
 				}
-				
+
 			}};
-		}; 
+		};
 		exe.args = argsFn;
-		
-		if (inputs.length){
-			console.log("overload in function");
-			return exe;
-		} else if (inputs.length === 0) {
-			console.log("overload as function")
-			return exe;
-		}
+        return exe;
 	}
-	
-	if (typeof module != 'undefined' && module.exports) {module.exports = context["overload"];} 
+
+	if (typeof module != 'undefined' && module.exports) {module.exports = context["overload"];}
 })(this)
