@@ -14,7 +14,7 @@
 		return runningMatch;
 	}
 
-	context.overload = function(){
+	context.overload = context.overload || function(){
 		var executionContext = this;
 		var inputs = arguments;
 		if (arguments.length === 1){
@@ -53,7 +53,7 @@
         return exe;
 	}
 
-    context.overload.define = function (obj) {
+    context.overload.define = context.overload.define || function (obj) {
         if (typeof obj === 'function') {
             try {
                 return context.overload.define(new obj());
