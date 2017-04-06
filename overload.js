@@ -53,5 +53,18 @@
         return exe;
 	}
 
+    context.overload.define = function (obj) {
+        if (typeof obj !== 'object') {
+            return;
+        }
+        else {
+            var objKeys = Object.keys(obj);
+            var objectDefinition = {};
+            for (var i = 0; i < objKeys.length; i++) {
+                console.log(objKeys[i]);
+            }
+        }
+    }
+
 	if (typeof module != 'undefined' && module.exports) {module.exports = context["overload"];}
 })(this)
