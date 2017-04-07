@@ -107,7 +107,7 @@ Because the Date and the Array objects have unique prototype functions that we k
 
 ## What about my own custom Classes?
 
-You can actually automatically get a class definition with the overload.define() function which accepts an instance of a class or the class constructor. Note though that you constructor will needs to be able to be called with New and to be able to be produce a valid output with no inputs. As a result it might be better to just use an instance of the object. 
+You can actually automatically get a class definition with the overload.define() function which accepts an instance of a class or the class constructor. Note though that the constructor of this class will needs to be able to be called with New and also be able to be produce a valid output with no inputs. As a result it might be better to just use an instance of the object. 
 
 ```javascript
 var Person = function (name, powerLevel){
