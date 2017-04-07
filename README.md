@@ -54,7 +54,7 @@ var testfn3 = function(a,b,c){
 
 ### When to use one or the other?
 
-All 3 methods are going to work for the common function however if you are using it as a class constructor, I would personally use method 2 or 3 over method one as the `new` command is often quite finicky and I really wouldn't take my chances with it. For example I would personally do the following
+All 3 methods are going to work for the common function however if you are using the function as a class constructor, I would personally use method 2 or 3 over method one as the `new` command is often quite finicky and I really wouldn't take my chances with it. For example I would personally do the following
 
 ```javascript
 var person = function(){
