@@ -52,6 +52,30 @@ var testfn3 = function(a,b,c){
 }
 ```
 
+### When to use one or the other?
+
+All 3 methods are going to work for the common function however if you are using it as a class constructor, I would personally use method 2 or 3 over method one as the `new` command is often quite finicky and I really wouldn't take my chances with it. For example I would personally do the following
+
+```javascript
+var person = function(){
+	var context = this;
+	overload(arguments)
+		.args(/*...*/).use(/*...*/)
+		.args(/*...*/).use(/*...*/)
+		.args(/*...*/).use(/*...*/)
+		.args().use(function(){
+			// build default object
+		});
+};
+
+person.prototype.method = overload()
+	.args(/*...*/).use(function(/*...*/){/*...*/})
+	.args(/*...*/).use(function(/*...*/){/*...*/})
+	.args().use(function(){
+		throw "My error message";
+	});
+```
+
 ## Type check and execution
 The type checker checks for types recursively using `typeof` and if it hits an object, it will type check the object as well. This means that you can pass an Object of types into the args function.
 
