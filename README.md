@@ -4,4 +4,4 @@ Overload.js is a small JS library that mimics and emulates method overloading in
 
 ## general usage
 
-Please visit [The Github Page]{https://github.com/muggy8/overloadjs} for full documentations!
+Please visit [The Github Page](https://github.com/muggy8/overloadjs) for full documentations!
