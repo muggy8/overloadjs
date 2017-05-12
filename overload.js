@@ -4,11 +4,18 @@
 	var matchType = function (inputArray, matchArray){
 		var runningMatch = true;
 		for (var key in matchArray) {
-			if (typeof inputArray[key] === "object" && typeof matchArray[key] === "object") {
-				runningMatch = matchType(inputArray[key], matchArray[key]) && runningMatch;
-			}
-			else if (typeof inputArray[key] !== matchArray[key]) {
-				runningMatch = false;
+			var notEqual = typeof matchArray[key] === "string" && matchArray[key][0] === "!";
+			
+			if (!notEqual){
+				if (typeof inputArray[key] === "object" && typeof matchArray[key] === "object") {
+					runningMatch = matchType(inputArray[key], matchArray[key]) && runningMatch;
+				} else if (typeof inputArray[key] !== matchArray[key]) {
+					runningMatch = false;
+				}
+			} else {
+				if (typeof inputArray[key] === matchArray[key].substring(1)){
+					runningMatch = false;
+				}
 			}
 		}
 		return runningMatch;
@@ -20,7 +27,6 @@
 		if (arguments.length === 1){
 			inputs = arguments[0];
 		}
-		//inputs = Array.prototype.slice.call(inputs, 0);
 
 		var exeArgs = [];
 		var exefake = function (){};
@@ -38,12 +44,16 @@
 			var useArgs = arguments;
 
 			return {use: function(callback){
+				if (useArgs.length == 0){
+					delete exe.args;
+				}
+				
 				exeArgs.push({match: useArgs, execute: callback});
+				
 				if (inputs.length && matchType(inputs, useArgs)) {
 					callback.apply(executionContext, inputs);
 					return exefake;
-				}
-				else {
+				} else {
 					return exe;
 				}
 
@@ -57,16 +67,13 @@
 		if (typeof obj === 'function') {
 			try {
 				return context.overload.define(new obj());
-			}
-			catch (err) {
+			} catch (err) {
 				console.log("Class definition does not have a null constructor");
 				return;
 			}
-		}
-		else if (typeof obj !== 'object') {
+		} else if (typeof obj !== 'object') {
 			return;
-		}
-		else {
+		} else {
 			var objectDefinition = {};
 
 			var objKeys = Object.keys(obj);

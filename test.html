@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<script src="overload.min.js"></script>
+		<script src="overload.js"></script>
 	</head>
 	<body>
 		<script>
@@ -64,6 +64,17 @@
 
             var foo = new myObj();
             console.log(overload.define(myObj));
+			
+			var testfn3 = overload()
+				.args("!undefined").use(function(){
+					console.log("detected variable");
+				})
+				.args().use(function(){
+					console.log("no variables detected")
+				})
+				
+			testfn3("something")
+			testfn3()
 		</script>
 	</body>
 </html>
