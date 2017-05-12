@@ -90,6 +90,18 @@ In the above example, you'll notice that you can place regular objects inside th
 
 When overloading a function, you must also call use immediately after args as that will link the function and method signature together. 
 
+In addition to comparing types, you can also declare that something is not a type by starting the declaration with "!"
+
+```javascript
+var mustDefineInput = overload()
+	.args("!undefined").use(function(input){
+		console.log(input);
+	})
+	.args().use(function(){
+		console.log("you need to have an input");
+	});
+```
+
 ## Other Objects?
 You may have noticed that because of the use of typeof operator on variables, we are not able to get some other crucial objects such as Date or Array. However they do fortunately have some unique functions that you are able to take advantage of like below:
 
@@ -147,6 +159,12 @@ var powerUp = Overload()
 		console.log("You cannot power up nobody");
 	});
 ```
+
+## Changelog
+If you came here from NPM you may be interested in what changed from version to version. 
+
+####Version 0.1.1
+In version 0.1.1 I have added a new functionality for not equals as well as the removal of the args function upon completing an overload via the empty args call followed by a use function. This will make it so that fully declared functions will not be modifiable outside of the initial declaration. Happy programming
 
 ## Cool! what else does it do?
 Nothing

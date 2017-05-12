@@ -1,6 +1,6 @@
 {
   "name": "method-overload",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Makes it easy to overload functions in Javascript",
   "main": "overload.min.js",
   "scripts": {
